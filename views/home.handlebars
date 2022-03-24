@@ -1,0 +1,20 @@
+<div class='container'>
+  <h1>Welcome {{name}} to admin page</h1>
+  <h2>New Product Upload</h2>
+  <form
+    action='/dimashki/admin/upload'
+    method='post'
+    enctype='multipart/form-data'
+  >
+    <div class='file-field input-field'>
+      <div class='btn'>
+        <span>File</span>
+        <input name='myProduct' type='file' />
+      </div>
+      <div class='file-path-wrapper'>
+        <input class='file-path validate' type='text' />
+      </div>
+    </div>
+    <button type='submit' class='btn'>Submit</button>
+  </form>
+</div>
