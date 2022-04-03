@@ -8,23 +8,23 @@ export const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-client.connect((err) => {
-  const collection = client.db('Dimashki-shop').collection('Products');
-  // perform actions on the collection object
+// client.connect((err) => {
+//   const collection = client.db('Dimashki-shop').collection('Products');
+//   // perform actions on the collection object
 
-  const newProduct = {
-    productId: '000',
-    productName: 'Shantah',
-    productDesc: 'Woman handbag high quality',
-    productPrice: 50,
-  };
+//   const newProduct = {
+//     productId: '000',
+//     productName: 'Shantah',
+//     productDesc: 'Woman handbag high quality',
+//     productPrice: 50,
+//   };
 
-  collection.insertOne(newProduct, (err, res) => {
-    if (err) {
-      throw err;
-    }
-    console.log(`Document added!`);
-  });
-});
+//   collection.insertOne(newProduct, (err, res) => {
+//     if (err) {
+//       throw err;
+//     }
+//     console.log(`Document added!`);
+//   });
+// });
 
-client.close();
+// client.close();

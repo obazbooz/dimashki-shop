@@ -31,41 +31,57 @@ router.post('/admin/upload', (req, res) => {
     if (err) {
       console.log('Error');
     } else {
-      console.log(req.file.filename);
-      res.status(200);
+      // console.log(req.file.filename);
+      if (req.file == undefined) {
+        console.log(`file undefined`);
+        res.render('home', { name: 'Tarek' });
+      } else {
+        console.log(req.body.productDesc);
+        res.status(200);
 
-      client.connect((err) => {
-        const collection = client.db('Dimashki-shop').collection('Products');
-        // perform actions on the collection object
+        client.connect((err) => {
+          const collection = client.db('Dimashki-shop').collection('Products');
+          // perform actions on the collection object
 
-        const newProduct = {
-          productId: '000',
-          productName: req.file.filename,
-          productDesc: 'Woman handbag high quality',
-          productPrice: 50,
-        };
+          const newProduct = {
+            productNumber: req.body.productNumber,
+            productName: req.file.filename,
+            productDesc: req.body.productDesc,
+            productPrice: req.body.productPrice,
+          };
 
-        collection.insertOne(newProduct, (err, res) => {
-          if (err) {
-            throw err;
-          }
-          console.log(`Document added!`);
+          collection.insertOne(newProduct, (err, res) => {
+            if (err) {
+              throw err;
+            }
+            console.log('Product added');
+          });
         });
-      });
 
-      // client.close();
+        // client.close();
 
-      res.render('uploaded', {
-        msg: 'Product uploaded',
-        product: `uploads/${req.file.filename}`,
-      });
+        res.render('uploaded', {
+          msg: 'Product uploaded',
+          product: `uploads/${req.file.filename}`,
+        });
+      }
     }
   });
 });
 
 router.get('/products', (req, res) => {
   // res.status(200).json('Welcome user');
-  res.render('products', {});
+  client.connect((err) => {
+    if (err) throw err;
+    const collection = client.db('Dimashki-shop').collection('Products');
+    const query = { productId: '125' };
+    collection.find(query).toArray((err, results) => {
+      if (err) throw err;
+      console.log(results);
+      res.render('products', { productName: results[0].productName });
+    });
+  });
+  //res.render('products', {});
 });
 
 export default router;
