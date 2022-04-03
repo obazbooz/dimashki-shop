@@ -74,11 +74,11 @@ router.get('/products', (req, res) => {
   client.connect((err) => {
     if (err) throw err;
     const collection = client.db('Dimashki-shop').collection('Products');
-    const query = { productId: '125' };
+    const query = {};
     collection.find(query).toArray((err, results) => {
       if (err) throw err;
       console.log(results);
-      res.render('products', { productName: results[0].productName });
+      res.render('products', { products: results });
     });
   });
   //res.render('products', {});
