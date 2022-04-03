@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
+import { client } from '../db.js';
 const router = express.Router();
 
 /*****************************************/
@@ -32,13 +33,39 @@ router.post('/admin/upload', (req, res) => {
     } else {
       console.log(req.file.filename);
       res.status(200);
-      res.render('uploaded', { file: `./public/uploads/${req.file.filename}` });
+
+      client.connect((err) => {
+        const collection = client.db('Dimashki-shop').collection('Products');
+        // perform actions on the collection object
+
+        const newProduct = {
+          productId: '000',
+          productName: req.file.filename,
+          productDesc: 'Woman handbag high quality',
+          productPrice: 50,
+        };
+
+        collection.insertOne(newProduct, (err, res) => {
+          if (err) {
+            throw err;
+          }
+          console.log(`Document added!`);
+        });
+      });
+
+      // client.close();
+
+      res.render('uploaded', {
+        msg: 'Product uploaded',
+        product: `uploads/${req.file.filename}`,
+      });
     }
   });
 });
 
 router.get('/products', (req, res) => {
-  res.status(200).json('Welcome user');
+  // res.status(200).json('Welcome user');
+  res.render('products', {});
 });
 
 export default router;

@@ -10,6 +10,10 @@ export const port = process.env.port || 3000;
 // body parsing //
 app.use(express.json());
 
+// public folder
+// app.use(express.static('./public'));
+app.use(express.static('public'))
+
 // API routing
 app.use('/dimashki', mainRoutes);
 
