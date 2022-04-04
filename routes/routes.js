@@ -23,7 +23,17 @@ const upload = multer({
 
 router.get('/admin', (req, res) => {
   res.status(200);
-  res.render('home', {});
+  res.render('admin_control_panel', {});
+});
+
+router.post('/admin/add', (req, res) => {
+  res.status(200);
+  res.render('add_product', {});
+});
+
+router.post('/admin/delete', (req, res) => {
+  res.status(200);
+  res.render('delete_product', {});
 });
 
 router.post('/admin/upload', (req, res) => {
@@ -34,11 +44,12 @@ router.post('/admin/upload', (req, res) => {
       // console.log(req.file.filename);
       if (req.file == undefined) {
         console.log(`file undefined`);
-        res.render('home', {  });
+        res.render('home', {});
       } else {
-        console.log(req.body.productDesc);
+        console.log(
+          `this is the product des from inside ${req.body.productDesc}`,
+        );
         res.status(200);
-
         client.connect((err) => {
           const collection = client.db('Dimashki-shop').collection('Products');
           // perform actions on the collection object
@@ -69,6 +80,24 @@ router.post('/admin/upload', (req, res) => {
   });
 });
 
+router.post('/admin/erase', (req, res) => {
+  console.log(req.body.productName);
+  client.connect((req, res, err) => {
+    const collection = client.db('Dimashki-shop').collection('Products');
+    // const query = { productNumber: req.body.productNumber };
+    // console.log(`product number to be deleted${req.body.productNumber}`);
+    // collection.deleteOne(query, (err, res) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   console.log('Product deleted');
+    // });
+  });
+  res.render('deleted', {
+    msg: 'Product deleted',
+  });
+});
+
 router.get('/products', (req, res) => {
   // res.status(200).json('Welcome user');
   client.connect((err) => {
@@ -77,7 +106,6 @@ router.get('/products', (req, res) => {
     const query = {};
     collection.find(query).toArray((err, results) => {
       if (err) throw err;
-      console.log(results);
       res.render('products', { products: results });
     });
   });

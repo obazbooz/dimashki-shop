@@ -1,0 +1,25 @@
+<div
+  style='  
+  margin: auto;
+  width: 50%;
+  padding: 10px;'
+>
+  <div style='margin: auto; width: 80%; padding: 10px;'>
+    <h2 style='margin:auto; width:90% ;'>{{msg}}</h2>
+    <img
+      src='/uploads/uploaded.png'
+      alt='Product not found!'
+      style='margin:auto; width:90% ;'
+    />
+    {{!-- <img src='/{{product}}' alt='Product not found!' /> --}}
+    {{!-- <p>{{productName}}</p> --}}
+    <form action='/dimashki/admin' method='get'>
+      <button type='submit' class='btn' style='margin:auto; width:90% ;'>
+        Upload New Product</button>
+    </form>
+    <form action='/dimashki/products' method='get'>
+      <button type='submit' class='btn' style='margin:auto; width:90% ;'>
+        To Products Page</button>
+    </form>
+  </div>
+</div>
