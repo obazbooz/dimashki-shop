@@ -23,7 +23,7 @@ const upload = multer({
 
 router.get('/admin', (req, res) => {
   res.status(200);
-  res.render('home', { name: 'Tarek' });
+  res.render('home', {});
 });
 
 router.post('/admin/upload', (req, res) => {
@@ -34,7 +34,7 @@ router.post('/admin/upload', (req, res) => {
       // console.log(req.file.filename);
       if (req.file == undefined) {
         console.log(`file undefined`);
-        res.render('home', { name: 'Tarek' });
+        res.render('home', {  });
       } else {
         console.log(req.body.productDesc);
         res.status(200);
