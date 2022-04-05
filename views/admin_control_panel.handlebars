@@ -7,14 +7,20 @@
       style='color: #004d40;'
     >
       <li>
+        <form method='get' action='/dimashki/products'>
+          <input type='hidden' name='navAdmin' value='value' />
+          <a onclick='this.parentNode.submit();'>Products page</a>
+        </form>
+      </li>
+      <li>
         <form method='post' action='/dimashki/admin/add'>
-          <input type='hidden' name='name' value='value' />
+          <input type='hidden' name='navAdd' value='value' />
           <a onclick='this.parentNode.submit();'>Add Product</a>
         </form>
       </li>
       <li>
         <form method='post' action='/dimashki/admin/delete'>
-          <input type='hidden' name='name' value='value' />
+          <input type='hidden' name='navDelete' value='value' />
           <a onclick='this.parentNode.submit();'>Delete Product</a>
         </form>
       </li>
