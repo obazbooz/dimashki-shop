@@ -13,24 +13,30 @@
                 alt=''
                 style='width: 300px; margin: auto; padding: 10px; max-height: 300px;'
               />
-              <span class='card-title'>Title</span>
+              <span class='card-title'>{{this.productTitle}}</span>
             </div>
             <div
               class='card-content'
               style='margin: auto; width: 90%; text-align: center;'
             >
-              <p>Product No: {{productNumber}}</p>
+              <p>Product Id: {{this.productId}}</p>
             </div>
+            {{!-- <div
+              class='card-content'
+              style='margin: auto; width: 90%; text-align: center;'
+            >
+              <p>Product No: {{this.productNumber}}</p>
+            </div> --}}
             <div
               class='card-content'
               style='margin: auto; width: 90%; text-align: center; color: #37474f;'
             >
-              <p>{{productDesc}}</p>
+              <p>{{this.productDesc}}</p>
             </div>
             <div class='card-price'>
               <p
                 style='margin: auto; width: 90%; text-align: center; padding: 10px; color: #b71c1c;'
-              >{{productPrice}}</p>
+              >{{this.productPrice}}</p>
             </div>
           </div>
         </div>
